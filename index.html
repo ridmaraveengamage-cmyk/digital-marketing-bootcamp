@@ -1845,7 +1845,7 @@ function funnelSVG(){
   return out+"</svg>";
 }
 function viewHome(){
-  const t=totals(),nd=nextDay(),cta=t.done===0?"Start Day 1":(t.done===14?"See what's next":`Continue with Day ${nd}`),href=t.done===14?"#next":`#day-${t.done===0?1:nd}`;
+  const t=totals(),nd=nextDay(),cta=t.done===0?"Start Day 1":(t.done===DAYS.length?"See what's next":`Continue with Day ${nd}`),href=t.done===DAYS.length?"#next":`#day-${t.done===0?1:nd}`;
   return `<section class="hero"><div>
     <div class="eyebrow">28 days in two parts · about 2 hours each · your own pace · free</div>
     <h1>Understand digital marketing <em>properly.</em></h1>
@@ -2014,7 +2014,7 @@ let currentView="home";
 function render(v){
   if(bindDay.cleanup){bindDay.cleanup();bindDay.cleanup=null}
   const app=$("#app");currentView=v.startsWith("day-")?"day":v;
-  if(v.startsWith("day-")){const n=Math.min(14,Math.max(1,parseInt(v.slice(4))||1));app.innerHTML=viewDay(n);bindDay(n)}
+  if(v.startsWith("day-")){const n=Math.min(DAYS.length,Math.max(1,parseInt(v.slice(4))||1));app.innerHTML=viewDay(n);bindDay(n)}
   else if(v==="cards"){app.innerHTML=viewCards();bindCards()}
   else if(v==="live"){app.innerHTML=viewLive()}
   else if(v==="next"){app.innerHTML=viewNext();bindNext()}
